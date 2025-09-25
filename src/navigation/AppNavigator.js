@@ -20,6 +20,7 @@ import SearchScreen from '../screens/SearchScreen';
 import WishlistScreen from '../screens/WishlistScreen';
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
+import CheckoutScreen from '../screens/CheckoutScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -34,6 +35,8 @@ const PlaceholderScreen = ({ title }) => (
 
 // Bottom Tab Navigator
 function TabNavigator() {
+  const { totalItems } = useApp();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -55,7 +58,18 @@ function TabNavigator() {
               break;
           }
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return (
+            <View>
+              <Ionicons name={iconName} size={size} color={color} />
+              {route.name === SCREEN_NAMES.CART && totalItems > 0 && (
+                <View style={styles.badge}>
+                  <Text style={styles.badgeText}>
+                    {totalItems > 99 ? '99+' : totalItems}
+                  </Text>
+                </View>
+              )}
+            </View>
+          );
         },
         tabBarActiveTintColor: COLORS.primary,
         tabBarInactiveTintColor: COLORS.gray,
@@ -74,22 +88,10 @@ function TabNavigator() {
         headerShown: false,
       })}
     >
-      <Tab.Screen 
-        name={SCREEN_NAMES.HOME} 
-        component={() => <PlaceholderScreen title="Home" />} 
-      />
-      <Tab.Screen 
-        name={SCREEN_NAMES.CATEGORIES} 
-        component={() => <PlaceholderScreen title="Categories" />} 
-      />
-      <Tab.Screen 
-        name={SCREEN_NAMES.CART} 
-        component={() => <PlaceholderScreen title="Cart" />} 
-      />
-      <Tab.Screen 
-        name={SCREEN_NAMES.PROFILE} 
-        component={() => <PlaceholderScreen title="Profile" />} 
-      />
+      <Tab.Screen name={SCREEN_NAMES.HOME} component={HomeScreen} />
+      <Tab.Screen name={SCREEN_NAMES.CATEGORIES} component={CategoriesScreen} />
+      <Tab.Screen name={SCREEN_NAMES.CART} component={CartScreen} />
+      <Tab.Screen name={SCREEN_NAMES.PROFILE} component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
@@ -156,27 +158,27 @@ function AppNavigator() {
           />
           <Stack.Screen 
             name={SCREEN_NAMES.PRODUCT_DETAIL} 
-            component={() => <PlaceholderScreen title="Product Detail" />}
+            component={ProductDetailScreen}
             options={{ title: 'Product Details' }}
           />
           <Stack.Screen 
             name={SCREEN_NAMES.PRODUCT_LIST} 
-            component={() => <PlaceholderScreen title="Product List" />}
+            component={ProductListScreen}
             options={{ title: 'Products' }}
           />
           <Stack.Screen 
             name={SCREEN_NAMES.SEARCH} 
-            component={() => <PlaceholderScreen title="Search" />}
+            component={SearchScreen}
             options={{ title: 'Search Products' }}
           />
           <Stack.Screen 
             name={SCREEN_NAMES.WISHLIST} 
-            component={() => <PlaceholderScreen title="Wishlist" />}
+            component={WishlistScreen}
             options={{ title: 'My Wishlist' }}
           />
           <Stack.Screen 
             name={SCREEN_NAMES.CHECKOUT} 
-            component={() => <PlaceholderScreen title="Checkout" />}
+            component={CheckoutScreen}
             options={{ title: 'Checkout' }}
           />
         </Stack.Navigator>
@@ -201,6 +203,24 @@ const styles = StyleSheet.create({
   placeholderSubText: {
     fontSize: SIZES.base,
     color: COLORS.textSecondary,
+  },
+  badge: {
+    position: 'absolute',
+    right: -8,
+    top: -5,
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: COLORS.white,
+  },
+  badgeText: {
+    color: COLORS.white,
+    fontSize: 10,
+    fontWeight: 'bold',
   },
 });
 

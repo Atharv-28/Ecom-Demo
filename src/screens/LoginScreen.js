@@ -17,7 +17,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SIZES, SHADOWS } from '../utils/theme';
 import { SCREEN_NAMES } from '../utils/constants';
 import { useApp } from '../context/AppContext';
-import { MOCK_USER } from '../data/mockData';
+
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -26,6 +26,12 @@ const LoginScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { login } = useApp();
+
+  // Demo user credentials
+  const DEMO_USER = {
+    email: 'test@test.com',
+    password: '123456'
+  };
 
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {
@@ -37,10 +43,34 @@ const LoginScreen = ({ navigation }) => {
     
     // Simulate API call
     setTimeout(() => {
-      // For demo purposes, accept any email/password combination
-      login(MOCK_USER);
-      setIsLoading(false);
+      // Check for demo user credentials
+      if (email.toLowerCase() === DEMO_USER.email && password === DEMO_USER.password) {
+        const demoUser = {
+          id: '1',
+          email: DEMO_USER.email,
+          name: 'Demo User',
+          avatar: null,
+        };
+        login(demoUser);
+        setIsLoading(false);
+        Alert.alert('Welcome!', 'Successfully logged in as demo user');
+      } else {
+        // For demo purposes, accept any other email/password combination
+        const user = {
+          id: '2',
+          email: email,
+          name: email.split('@')[0] || 'User',
+          avatar: null,
+        };
+        login(user);
+        setIsLoading(false);
+      }
     }, 1500);
+  };
+
+  const handleDemoLogin = () => {
+    setEmail(DEMO_USER.email);
+    setPassword(DEMO_USER.password);
   };
 
   const handleForgotPassword = () => {
@@ -158,6 +188,22 @@ const LoginScreen = ({ navigation }) => {
               <Ionicons name="logo-apple" size={20} color={COLORS.black} />
               <Text style={styles.socialButtonText}>Continue with Apple</Text>
             </TouchableOpacity>
+
+            {/* Demo Login Button */}
+            <TouchableOpacity 
+              style={styles.demoButton}
+              onPress={handleDemoLogin}
+            >
+              <Ionicons name="person-circle-outline" size={20} color={COLORS.primary} />
+              <Text style={styles.demoButtonText}>Use Demo Account</Text>
+            </TouchableOpacity>
+
+            {/* Demo Credentials Info */}
+            <View style={styles.demoInfoContainer}>
+              <Text style={styles.demoInfoText}>Demo Credentials:</Text>
+              <Text style={styles.demoCredentials}>Email: test@test.com</Text>
+              <Text style={styles.demoCredentials}>Password: 123456</Text>
+            </View>
           </View>
 
           {/* Footer Section */}
@@ -308,6 +354,43 @@ const styles = StyleSheet.create({
     color: COLORS.textPrimary,
     fontWeight: '500',
     marginLeft: SIZES.margin / 2,
+  },
+  demoButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.white,
+    borderWidth: 2,
+    borderColor: COLORS.primary,
+    borderStyle: 'dashed',
+    borderRadius: SIZES.radius * 1.5,
+    paddingVertical: SIZES.margin,
+    marginTop: SIZES.margin,
+    ...SHADOWS.light,
+  },
+  demoButtonText: {
+    fontSize: SIZES.base,
+    color: COLORS.primary,
+    fontWeight: '600',
+    marginLeft: SIZES.margin / 2,
+  },
+  demoInfoContainer: {
+    backgroundColor: COLORS.lightGray,
+    borderRadius: SIZES.radius,
+    padding: SIZES.margin,
+    marginTop: SIZES.margin,
+  },
+  demoInfoText: {
+    fontSize: SIZES.sm,
+    color: COLORS.textPrimary,
+    fontWeight: '600',
+    marginBottom: SIZES.margin / 2,
+  },
+  demoCredentials: {
+    fontSize: SIZES.sm,
+    color: COLORS.textSecondary,
+    fontFamily: 'monospace',
+    marginBottom: SIZES.margin / 4,
   },
   footerSection: {
     alignItems: 'center',

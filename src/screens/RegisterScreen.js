@@ -17,7 +17,6 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SIZES, SHADOWS } from '../utils/theme';
 import { SCREEN_NAMES } from '../utils/constants';
 import { useApp } from '../context/AppContext';
-import { MOCK_USER } from '../data/mockData';
 
 const RegisterScreen = ({ navigation }) => {
   const [formData, setFormData] = useState({
