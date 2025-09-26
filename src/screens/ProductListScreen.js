@@ -49,9 +49,14 @@ const ProductListScreen = ({ navigation, route }) => {
     }
     if (featured) {
       filtered = filtered.filter(product => product.isFeatured);
+      // If we have very few featured products, show all products as fallback
+      if (filtered.length < 3) {
+        filtered = allProducts; // Show all products if featured selection is too small
+      }
     }
     if (isNew) {
-      filtered = filtered.filter(product => product.isNew);
+      // Show all products for "New Arrivals" section
+      filtered = allProducts;
     }
 
     setFilteredProducts(filtered);
@@ -72,9 +77,14 @@ const ProductListScreen = ({ navigation, route }) => {
     }
     if (featured) {
       filtered = filtered.filter(product => product.isFeatured);
+      // If we have very few featured products, show all products as fallback
+      if (filtered.length < 3) {
+        filtered = [...allProducts]; // Show all products if featured selection is too small
+      }
     }
     if (isNew) {
-      filtered = filtered.filter(product => product.isNew);
+      // Show all products for "New Arrivals" section
+      filtered = [...allProducts];
     }
 
     // Apply price filter

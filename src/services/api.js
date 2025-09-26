@@ -90,8 +90,8 @@ class ApiService {
       images: [apiProduct.image], // API only provides one image
       inStock: true,
       stockCount: Math.floor(Math.random() * 50) + 10, // Random stock since API doesn't provide
-      isFeatured: Math.random() > 0.7, // Random featured status
-      isNew: Math.random() > 0.8, // Random new status
+      isFeatured: Math.random() > 0.4, // 60% chance of being featured
+      isNew: Math.random() > 0.6, // 40% chance of being new
     };
   }
 

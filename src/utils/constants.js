@@ -1,7 +1,6 @@
 export const APP_CONFIG = {
   APP_NAME: 'EcomDemo',
   VERSION: '1.0.0',
-  API_URL: 'https://api.ecomdemo.com', // Replace with actual API URL
 };
 
 export const STORAGE_KEYS = {
@@ -14,10 +13,7 @@ export const STORAGE_KEYS = {
 export const CATEGORIES = [
   { id: 1, name: 'Electronics', icon: 'phone-portrait-outline' },
   { id: 2, name: 'Fashion', icon: 'shirt-outline' },
-  { id: 3, name: 'Home & Garden', icon: 'home-outline' },
-  { id: 4, name: 'Sports', icon: 'football-outline' },
-  { id: 5, name: 'Beauty', icon: 'flower-outline' },
-  { id: 6, name: 'Books', icon: 'book-outline' },
+  { id: 3, name: 'Jewelry', icon: 'diamond-outline' },
 ];
 
 export const SORT_OPTIONS = [

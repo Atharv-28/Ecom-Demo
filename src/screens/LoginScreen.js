@@ -78,7 +78,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   const navigateToRegister = () => {
-    navigation.navigate(SCREEN_NAMES.REGISTER);
+    Alert.alert('Under Development', 'Sign up feature is currently under development. Please use the demo account for now.');
   };
 
   return (
@@ -177,17 +177,6 @@ const LoginScreen = ({ navigation }) => {
               <Text style={styles.dividerText}>OR</Text>
               <View style={styles.dividerLine} />
             </View>
-
-            {/* Social Login Buttons */}
-            <TouchableOpacity style={styles.socialButton}>
-              <Ionicons name="logo-google" size={20} color={COLORS.error} />
-              <Text style={styles.socialButtonText}>Continue with Google</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.socialButton}>
-              <Ionicons name="logo-apple" size={20} color={COLORS.black} />
-              <Text style={styles.socialButtonText}>Continue with Apple</Text>
-            </TouchableOpacity>
 
             {/* Demo Login Button */}
             <TouchableOpacity 

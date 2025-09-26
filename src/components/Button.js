@@ -93,25 +93,27 @@ const styles = StyleSheet.create({
   
   // Sizes
   smallButton: {
-    paddingVertical: SIZES.padding / 2,
-    paddingHorizontal: SIZES.padding,
-    height: 36,
+    paddingVertical: SIZES.padding / 1.5,
+    paddingHorizontal: SIZES.padding * 1.2,
+    minHeight: 36,
   },
   mediumButton: {
-    paddingVertical: SIZES.padding,
-    paddingHorizontal: SIZES.padding * 1.5,
-    height: SIZES.buttonHeight,
-  },
-  largeButton: {
     paddingVertical: SIZES.padding * 1.2,
     paddingHorizontal: SIZES.padding * 2,
-    height: SIZES.buttonHeight + 8,
+    minHeight: SIZES.buttonHeight,
+  },
+  largeButton: {
+    paddingVertical: SIZES.padding * 1.4,
+    paddingHorizontal: SIZES.padding * 2.5,
+    minHeight: SIZES.buttonHeight + 8,
   },
   
   // Text styles
   text: {
     fontWeight: '600',
     textAlign: 'center',
+    lineHeight: SIZES.base * 1.3,
+    paddingHorizontal: 2,
   },
   primaryText: {
     color: COLORS.white,
@@ -129,12 +131,15 @@ const styles = StyleSheet.create({
   // Text sizes
   smallText: {
     fontSize: SIZES.sm,
+    lineHeight: SIZES.sm * 1.4,
   },
   mediumText: {
     fontSize: SIZES.base,
+    lineHeight: SIZES.base * 1.3,
   },
   largeText: {
     fontSize: SIZES.lg,
+    lineHeight: SIZES.lg * 1.2,
   },
   
   // Disabled states

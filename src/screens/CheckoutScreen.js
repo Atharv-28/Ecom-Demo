@@ -25,15 +25,9 @@ const CheckoutScreen = ({ navigation }) => {
     {
       id: 1,
       name: 'Home',
-      address: '123 Main Street, New York, NY 10001',
-      phone: '+1 (555) 123-4567',
-    },
-    {
-      id: 2,
-      name: 'Office',
-      address: '456 Business Ave, New York, NY 10002',
-      phone: '+1 (555) 987-6543',
-    },
+      address: 'xx, yy, India',
+      phone: '+91 xxxxxxxxxx',
+    }
   ];
 
   const paymentMethods = [
@@ -50,14 +44,7 @@ const CheckoutScreen = ({ navigation }) => {
       name: 'PayPal',
       details: 'user@example.com',
       icon: 'logo-paypal',
-    },
-    {
-      id: 3,
-      type: 'apple',
-      name: 'Apple Pay',
-      details: 'Touch ID or Face ID',
-      icon: 'logo-apple',
-    },
+    }
   ];
 
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
@@ -86,7 +73,7 @@ const CheckoutScreen = ({ navigation }) => {
           text: 'Continue Shopping',
           onPress: () => {
             clearCart();
-            navigation.navigate('Home');
+            navigation.navigate('MainTabs', { screen: 'Home' });
           },
         },
       ]

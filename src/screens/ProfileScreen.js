@@ -46,14 +46,14 @@ const ProfileScreen = ({ navigation }) => {
       title: 'Help & Support',
       icon: 'help-circle-outline',
       subtitle: 'Get help and contact support',
-      onPress: () => Alert.alert('Support', 'Email: support@ecomdemo.com\nPhone: +1 (555) 123-4567'),
+      onPress: () => Alert.alert('Support', 'Email: support@ecomdemo.com(false_id)\nPhone: +91 xxxxxxxxxx'),
     },
     {
       id: 'about',
       title: 'About',
       icon: 'information-circle-outline',
       subtitle: 'App version and info',
-      onPress: () => Alert.alert('About', 'Ecom Demo App\nVersion 1.0.0\nBuilt with React Native & Expo'),
+      onPress: () => Alert.alert('About', 'Ecom-Demo App\nVersion 1.0.0\nBuilt with React Native & Expo'),
     },
   ];
 
@@ -117,59 +117,11 @@ const ProfileScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        {/* Stats */}
-        <View style={styles.statsSection}>
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>12</Text>
-            <Text style={styles.statLabel}>Orders</Text>
-          </View>
-          <View style={styles.statDivider} />
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>5</Text>
-            <Text style={styles.statLabel}>Wishlist</Text>
-          </View>
-          <View style={styles.statDivider} />
-          <View style={styles.statItem}>
-            <Text style={styles.statValue}>3</Text>
-            <Text style={styles.statLabel}>Reviews</Text>
-          </View>
-        </View>
-
         {/* Menu Items */}
         <View style={styles.menuSection}>
           {profileMenuItems.map(renderMenuItem)}
         </View>
-
-        {/* Settings */}
-        <View style={styles.settingsSection}>
-          <Text style={styles.sectionTitle}>Settings</Text>
-          
-          <View style={styles.settingItem}>
-            <View style={styles.settingLeft}>
-              <Ionicons name="notifications-outline" size={24} color={COLORS.primary} />
-              <Text style={styles.settingText}>Push Notifications</Text>
-            </View>
-            <Switch
-              value={notifications}
-              onValueChange={setNotifications}
-              trackColor={{ false: COLORS.lightGray, true: COLORS.primary }}
-              thumbColor={notifications ? COLORS.white : COLORS.white}
-            />
-          </View>
-
-          <View style={styles.settingItem}>
-            <View style={styles.settingLeft}>
-              <Ionicons name="moon-outline" size={24} color={COLORS.primary} />
-              <Text style={styles.settingText}>Dark Mode</Text>
-            </View>
-            <Switch
-              value={darkMode}
-              onValueChange={setDarkMode}
-              trackColor={{ false: COLORS.lightGray, true: COLORS.primary }}
-              thumbColor={darkMode ? COLORS.white : COLORS.white}
-            />
-          </View>
-        </View>
+        
 
         {/* Logout Button */}
         <View style={styles.logoutSection}>
@@ -184,7 +136,7 @@ const ProfileScreen = ({ navigation }) => {
         {/* App Info */}
         <View style={styles.appInfo}>
           <Text style={styles.appInfoText}>Ecom Demo v1.0.0</Text>
-          <Text style={styles.appInfoText}>Made with ❤️ using React Native</Text>
+          <Text style={styles.appInfoText}>Made with React Native by ATHARV TAMBEKAR</Text>
         </View>
       </ScrollView>
     </SafeAreaView>

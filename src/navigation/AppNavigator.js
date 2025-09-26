@@ -19,7 +19,6 @@ import ProductListScreen from '../screens/ProductListScreen';
 import SearchScreen from '../screens/SearchScreen';
 import WishlistScreen from '../screens/WishlistScreen';
 import LoginScreen from '../screens/LoginScreen';
-import RegisterScreen from '../screens/RegisterScreen';
 import CheckoutScreen from '../screens/CheckoutScreen';
 
 const Tab = createBottomTabNavigator();
@@ -96,7 +95,7 @@ function TabNavigator() {
   );
 }
 
-// Auth Stack Navigator (Login/Register screens)
+// Auth Stack Navigator (Login screen only)
 function AuthStack() {
   return (
     <Stack.Navigator
@@ -116,14 +115,6 @@ function AuthStack() {
         name={SCREEN_NAMES.LOGIN} 
         component={LoginScreen}
         options={{ headerShown: false }}
-      />
-      <Stack.Screen 
-        name={SCREEN_NAMES.REGISTER} 
-        component={RegisterScreen}
-        options={{ 
-          title: 'Create Account',
-          headerBackTitleVisible: false,
-        }}
       />
     </Stack.Navigator>
   );
