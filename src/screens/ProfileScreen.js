@@ -21,6 +21,13 @@ const ProfileScreen = ({ navigation }) => {
   
   const profileMenuItems = [
     {
+      id: 'wishlist',
+      title: 'My Wishlist',
+      icon: 'heart-outline',
+      subtitle: 'View your favorite items',
+      onPress: () => navigation.navigate('Wishlist'),
+    },
+    {
       id: 'orders',
       title: 'My Orders',
       icon: 'bag-outline',

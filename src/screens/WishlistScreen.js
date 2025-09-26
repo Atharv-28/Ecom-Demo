@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useApp } from '../context/AppContext';
@@ -49,9 +50,26 @@ const WishlistScreen = ({ navigation }) => {
         
         {wishlist.map((item) => (
           <View key={item.id} style={styles.wishlistItem}>
-            <View style={styles.productInfo}>
-              <Text style={styles.productName}>{item.name}</Text>
-              <Text style={styles.productPrice}>${item.price}</Text>
+            <View style={styles.itemContainer}>
+              {/* Product Image */}
+              <View style={styles.imageContainer}>
+                <Image
+                  source={{ uri: item.image }}
+                  style={styles.productImage}
+                  resizeMode="contain"
+                />
+              </View>
+              
+              {/* Product Info */}
+              <View style={styles.productInfo}>
+                <Text style={styles.productName} numberOfLines={2}>
+                  {item.title || item.name}
+                </Text>
+                <Text style={styles.productCategory}>
+                  {item.category}
+                </Text>
+                <Text style={styles.productPrice}>${item.price}</Text>
+              </View>
             </View>
             
             <View style={styles.actionButtons}>
@@ -59,7 +77,7 @@ const WishlistScreen = ({ navigation }) => {
                 style={styles.addToCartButton}
                 onPress={() => handleAddToCart(item)}
               >
-                <Ionicons name="bag-outline" size={20} color={COLORS.white} />
+                <Ionicons name="bag-outline" size={18} color={COLORS.white} />
                 <Text style={styles.addToCartText}>Add to Cart</Text>
               </TouchableOpacity>
               
@@ -67,7 +85,7 @@ const WishlistScreen = ({ navigation }) => {
                 style={styles.removeButton}
                 onPress={() => handleRemoveFromWishlist(item.id)}
               >
-                <Ionicons name="trash-outline" size={20} color={COLORS.error} />
+                <Ionicons name="heart" size={20} color={COLORS.error} />
               </TouchableOpacity>
             </View>
           </View>
@@ -130,17 +148,42 @@ const styles = StyleSheet.create({
     marginBottom: SIZES.margin,
     ...SHADOWS.light,
   },
-  productInfo: {
+  itemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: SIZES.margin,
   },
+  imageContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: SIZES.radius,
+    backgroundColor: COLORS.lightGray,
+    marginRight: SIZES.margin,
+    padding: SIZES.padding / 2,
+  },
+  productImage: {
+    width: '100%',
+    height: '100%',
+  },
+  productInfo: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   productName: {
-    fontSize: SIZES.lg,
+    fontSize: SIZES.base,
     fontWeight: '600',
     color: COLORS.textPrimary,
     marginBottom: 4,
+    lineHeight: 20,
+  },
+  productCategory: {
+    fontSize: SIZES.small,
+    color: COLORS.textSecondary,
+    marginBottom: 4,
+    textTransform: 'capitalize',
   },
   productPrice: {
-    fontSize: SIZES.base,
+    fontSize: SIZES.lg,
     fontWeight: 'bold',
     color: COLORS.primary,
   },

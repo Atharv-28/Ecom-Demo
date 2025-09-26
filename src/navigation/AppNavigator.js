@@ -150,27 +150,27 @@ function AppNavigator() {
           <Stack.Screen 
             name={SCREEN_NAMES.PRODUCT_DETAIL} 
             component={ProductDetailScreen}
-            options={{ title: 'Product Details' }}
+            options={{ headerShown: false }}
           />
           <Stack.Screen 
             name={SCREEN_NAMES.PRODUCT_LIST} 
             component={ProductListScreen}
-            options={{ title: 'Products' }}
+            options={{ headerShown: false }}
           />
           <Stack.Screen 
             name={SCREEN_NAMES.SEARCH} 
             component={SearchScreen}
-            options={{ title: 'Search Products' }}
+            options={{ headerShown: false }}
           />
           <Stack.Screen 
             name={SCREEN_NAMES.WISHLIST} 
             component={WishlistScreen}
-            options={{ title: 'My Wishlist' }}
+            options={{ headerShown: false }}
           />
           <Stack.Screen 
             name={SCREEN_NAMES.CHECKOUT} 
             component={CheckoutScreen}
-            options={{ title: 'Checkout' }}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       )}
