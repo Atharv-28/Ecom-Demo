@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiService } from '../services/api';
 
-// Custom hook for fetching products
 export const useProducts = (options = {}) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,7 +63,6 @@ export const useProducts = (options = {}) => {
   };
 };
 
-// Custom hook for fetching single product
 export const useProduct = (productId) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -106,7 +104,6 @@ export const useProduct = (productId) => {
   };
 };
 
-// Custom hook for fetching categories
 export const useCategories = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);

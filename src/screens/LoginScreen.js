@@ -27,7 +27,6 @@ const LoginScreen = ({ navigation }) => {
 
   const { login } = useApp();
 
-  // Demo user credentials
   const DEMO_USER = {
     email: 'test@test.com',
     password: '123456'
@@ -41,9 +40,7 @@ const LoginScreen = ({ navigation }) => {
 
     setIsLoading(true);
     
-    // Simulate API call
     setTimeout(() => {
-      // Check for demo user credentials
       if (email.toLowerCase() === DEMO_USER.email && password === DEMO_USER.password) {
         const demoUser = {
           id: '1',

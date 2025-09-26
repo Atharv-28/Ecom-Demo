@@ -29,7 +29,6 @@ const Header = ({
   return (
     <SafeAreaView style={[styles.safeArea, style]}>
       <View style={styles.container}>
-        {/* Left Section */}
         <View style={styles.leftSection}>
           {showBack ? (
             <TouchableOpacity
@@ -46,14 +45,12 @@ const Header = ({
           )}
         </View>
 
-        {/* Center Section - Title when showing back button */}
         {showBack && (
           <View style={styles.centerSection}>
             <Text style={styles.centerTitle}>{title}</Text>
           </View>
         )}
 
-        {/* Right Section */}
         <View style={styles.rightSection}>
           {showSearch && (
             <TouchableOpacity

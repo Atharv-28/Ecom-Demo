@@ -2,7 +2,6 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { STORAGE_KEYS } from '../utils/constants';
 
-// Initial state
 const initialState = {
   cart: [],
   wishlist: [],
@@ -12,7 +11,6 @@ const initialState = {
   totalPrice: 0,
 };
 
-// Action types
 export const CART_ACTIONS = {
   ADD_TO_CART: 'ADD_TO_CART',
   REMOVE_FROM_CART: 'REMOVE_FROM_CART',
@@ -25,7 +23,6 @@ export const CART_ACTIONS = {
   LOAD_PERSISTED_DATA: 'LOAD_PERSISTED_DATA',
 };
 
-// Reducer function
 const appReducer = (state, action) => {
   switch (action.type) {
     case CART_ACTIONS.ADD_TO_CART: {
@@ -137,19 +134,15 @@ const appReducer = (state, action) => {
   }
 };
 
-// Create context
 const AppContext = createContext();
 
-// Context provider component
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
-  // Load persisted data on app start
   useEffect(() => {
     loadPersistedData();
   }, []);
 
-  // Persist data when state changes
   useEffect(() => {
     persistData();
   }, [state.cart, state.wishlist, state.user]);
@@ -197,7 +190,6 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  // Action creators
   const addToCart = (product) => {
     dispatch({ type: CART_ACTIONS.ADD_TO_CART, payload: product });
   };
@@ -260,7 +252,6 @@ export const AppProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use the app context
 export const useApp = () => {
   const context = useContext(AppContext);
   if (!context) {

@@ -9,7 +9,6 @@ import { COLORS, SIZES } from '../utils/theme';
 import { SCREEN_NAMES } from '../utils/constants';
 import { useApp } from '../context/AppContext';
 
-// Import screens (we'll create these next)
 import HomeScreen from '../screens/HomeScreen';
 import CategoriesScreen from '../screens/CategoriesScreen';
 import CartScreen from '../screens/CartScreen';
@@ -24,7 +23,6 @@ import CheckoutScreen from '../screens/CheckoutScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-// Temporary placeholder component for screens we haven't created yet
 const PlaceholderScreen = ({ title }) => (
   <View style={styles.placeholder}>
     <Text style={styles.placeholderText}>{title} Screen</Text>
@@ -32,7 +30,6 @@ const PlaceholderScreen = ({ title }) => (
   </View>
 );
 
-// Bottom Tab Navigator
 function TabNavigator() {
   const { totalItems } = useApp();
 
@@ -95,7 +92,6 @@ function TabNavigator() {
   );
 }
 
-// Auth Stack Navigator (Login screen only)
 function AuthStack() {
   return (
     <Stack.Navigator
@@ -120,7 +116,6 @@ function AuthStack() {
   );
 }
 
-// Main Stack Navigator
 function AppNavigator() {
   const { isLoggedIn } = useApp();
 
