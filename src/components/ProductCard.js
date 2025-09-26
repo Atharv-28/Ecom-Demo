@@ -102,7 +102,7 @@ const ProductCard = ({
         <Image
           source={{ uri: product.images[0] }}
           style={styles.image}
-          resizeMode="cover"
+          resizeMode="contain"
         />
         
         {/* Badges */}
@@ -174,10 +174,13 @@ const styles = StyleSheet.create({
   imageContainer: {
     position: 'relative',
     height: 180,
+    backgroundColor: COLORS.lightGray,
+    padding: SIZES.padding,
   },
   image: {
     width: '100%',
     height: '100%',
+    borderRadius: SIZES.radius / 2,
   },
   discountBadge: {
     position: 'absolute',
