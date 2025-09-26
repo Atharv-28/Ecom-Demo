@@ -41,7 +41,7 @@ const HomeScreen = ({ navigation }) => {
   const featuredProducts = allProducts.filter(product => product.isFeatured);
   const newProducts = allProducts.filter(product => product.isNew);
 
-  // If there's an error, show error message
+  // If there's an error and no products (not using fallback), show error message
   if (error && !refreshing && allProducts.length === 0) {
     return (
       <SafeAreaView style={styles.container}>
@@ -97,7 +97,7 @@ const HomeScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Header
         title={user ? `Hello, ${user.name.split(' ')[0]}!` : 'Welcome!'}
-        subtitle="What are you looking for today?"
+        subtitle="What are you looking for?"
         showSearch={true}
         showCart={true}
         onSearchPress={handleSearchPress}
@@ -116,6 +116,15 @@ const HomeScreen = ({ navigation }) => {
           />
         }
       >
+        {/* Offline Banner */}
+        {error && allProducts.length > 0 && (
+          <View style={styles.offlineBanner}>
+            <Ionicons name="cloud-offline-outline" size={16} color={COLORS.warning} />
+            <Text style={styles.offlineBannerText}>
+              Using offline data. Pull to refresh when online.
+            </Text>
+          </View>
+        )}
         {/* Search Bar */}
         <View style={styles.section}>
           <SearchBar onSearch={handleSearchPress} />
@@ -145,10 +154,10 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           {loading && !refreshing ? (
-            <ProductGridSkeleton numItems={4} />
+            <ProductGridSkeleton numItems={6} />
           ) : (
             <FlatList
-              data={featuredProducts.length > 0 ? featuredProducts : allProducts.slice(0, 8)}
+              data={featuredProducts.length > 0 ? featuredProducts : allProducts.slice(0, 10)}
               renderItem={renderProductCard}
               keyExtractor={(item) => item.id.toString()}
               horizontal
@@ -169,10 +178,10 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           {loading && !refreshing ? (
-            <ProductGridSkeleton numItems={4} />
+            <ProductGridSkeleton numItems={6} />
           ) : (
             <FlatList
-              data={newProducts.length > 0 ? newProducts : allProducts.slice(4, 12)}
+              data={newProducts.length > 0 ? newProducts : allProducts.slice(10)}
               renderItem={renderProductCard}
               keyExtractor={(item) => item.id.toString()}
               horizontal
@@ -294,6 +303,25 @@ const styles = StyleSheet.create({
   },
   bottomPadding: {
     height: SIZES.padding * 2,
+  },
+  offlineBanner: {
+    backgroundColor: COLORS.warning + '20', // 20% opacity
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: SIZES.margin / 2,
+    paddingHorizontal: SIZES.padding,
+    marginHorizontal: SIZES.padding,
+    marginTop: SIZES.margin / 2,
+    borderRadius: SIZES.radius,
+    borderWidth: 1,
+    borderColor: COLORS.warning + '40',
+  },
+  offlineBannerText: {
+    fontSize: SIZES.xs,
+    color: COLORS.warning,
+    marginLeft: SIZES.margin / 2,
+    fontWeight: '500',
   },
 });
 

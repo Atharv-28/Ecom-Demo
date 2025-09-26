@@ -2,20 +2,53 @@ const BASE_URL = 'https://fakestoreapi.com';
 
 // API service class
 class ApiService {
-  async get(endpoint) {
-    try {
-      const response = await fetch(`${BASE_URL}${endpoint}`);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+  async get(endpoint, retries = 2) {
+    let lastError;
+    
+    for (let attempt = 0; attempt <= retries; attempt++) {
+      try {
+        console.log(`Attempting API call: ${BASE_URL}${endpoint} (attempt ${attempt + 1})`);
+        
+        // Create an AbortController for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 100000); // 10 second timeout
+
+        const response = await fetch(`${BASE_URL}${endpoint}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          signal: controller.signal,
+        });
+
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log(`API call successful: ${BASE_URL}${endpoint}`);
+        return { data, error: null };
+      } catch (error) {
+        lastError = error;
+        console.error(`API Error for ${endpoint} (attempt ${attempt + 1}):`, error);
+        
+        // If it's the last attempt or a non-network error, don't retry
+        if (attempt === retries || (error.name !== 'TypeError' && error.name !== 'AbortError')) {
+          break;
+        }
+        
+        // Wait before retrying (exponential backoff)
+        if (attempt < retries) {
+          const delay = Math.pow(2, attempt) * 1000; // 1s, 2s, 4s...
+          console.log(`Retrying in ${delay}ms...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+        }
       }
-      
-      const data = await response.json();
-      return { data, error: null };
-    } catch (error) {
-      console.error(`API Error for ${endpoint}:`, error);
-      return { data: null, error: error.message };
     }
+    
+    return { data: null, error: lastError.message };
   }
 
   // Fetch all products
